@@ -1,0 +1,195 @@
+--Create table:
+Guest table: 
+CREATE TABLE Guest (
+    guest_id INTEGER PRIMARY KEY,
+    first_name TEXT,
+    last_name TEXT,
+    phone_number TEXT,
+    email TEXT,
+    address TEXT,
+    gender TEXT,
+    date_of_birth DATE
+);
+
+Room table:
+CREATE TABLE Room (
+    room_id INTEGER PRIMARY KEY,
+    room_type TEXT,
+    price_per_night REAL
+);
+
+Booking table:
+CREATE TABLE Booking (
+    booking_id INTEGER PRIMARY KEY,
+    booking_date DATE,
+    check_in_date DATE,
+    check_out_date DATE,
+    booking_status TEXT,
+    guest_id INTEGER,
+    room_id INTEGER,
+    FOREIGN KEY (guest_id) REFERENCES Guest(guest_id),
+    FOREIGN KEY (room_id) REFERENCES Room(room_id)
+);
+
+Payment table:
+CREATE TABLE Payment (
+    payment_id INTEGER PRIMARY KEY,
+    payment_date DATE,
+    amount_paid REAL,
+    payment_method TEXT,
+    booking_id INTEGER,
+    FOREIGN KEY (booking_id) REFERENCES Booking(booking_id)
+);
+
+--Populate the table:
+Guest table(16 rows):
+INSERT INTO Guest (guest_id, first_name, last_name, phone_number, email, address, gender, date_of_birth) VALUES 
+(1, 'John', 'Doe', '1234567890', 'john.doe@example.com', '123 Main St, New York', 'Male', '1980-01-01'),
+(2, 'Jane', 'Smith', '0987654321', 'jane.smith@example.com', '456 Maple Ave, Paris', 'Female', '1992-05-14'),
+(3, 'Alice', 'Johnson', '1122334455', 'alice.johnson@example.com', '789 Oak St, Berlin', 'Female', '1985-10-10'),
+(4, 'Charlie', 'Brown', '3344556677', 'charlie.brown@example.com', '101 Pine St, London', 'Male', '1990-07-21'),
+(5, 'Emily', 'Davis', '5566778899', 'emily.davis@example.com', '202 Birch Ave, Rome', 'Female', '1995-12-02'),
+(6, 'Michael', 'Wilson', '6677889900', 'michael.wilson@example.com', '303 Cedar St, Tokyo', 'Male', '1988-03-15'),
+(7, 'Olivia', 'Taylor', '7788990011', 'olivia.taylor@example.com', '404 Willow St, Sydney', 'Female', '1977-08-23'),
+(8, 'Daniel', 'Moore', '8899001122', 'daniel.moore@example.com', '505 Spruce St, Moscow', 'Male', '1966-09-05'),
+(9, 'Sophia', 'Anderson', '9900112233', 'sophia.anderson@example.com', '606 Maple St, Dubai', 'Female', '1975-11-18'),
+(10, 'James', 'Thomas', '1011223344', 'james.thomas@example.com', '707 Palm St, Hong Kong', 'Male', '1983-04-12'),
+(11, 'Linda', 'Jackson', '1122334455', 'linda.jackson@example.com', '808 Birch St, Amsterdam', 'Female', '1991-07-30'),
+(12, 'Robert', 'Harris', '2233445566', 'robert.harris@example.com', '909 Ash St, Seoul', 'Male', '1998-02-19'),
+(13, 'Jessica', 'Martin', '3344556677', 'jessica.martin@example.com', '1010 Cedar St, Singapore', 'Female', '1994-06-21'),
+(14, 'William', 'Garcia', '4455667788', 'william.garcia@example.com', '1111 Fir St, Madrid', 'Male', '1982-12-15'),
+(15, 'Karen', 'Martinez', '5566778899', 'karen.martinez@example.com', '1212 Oak St, Miami', 'Female', '1973-05-26'),
+(16, 'Pierre', 'Dubois', '123456789', 'pierre.dubois@example.com', 'Paris, France', 'Male', '1985-06-15');
+
+Room table(16 rows):
+INSERT INTO Room (room_id, room_type, price_per_night) VALUES 
+(1, 'Single', 100.00),
+(2, 'Double', 150.00),
+(3, 'Suite', 250.00),
+(4, 'Single', 90.00),
+(5, 'Double', 180.00),
+(6, 'Suite', 270.00),
+(7, 'Single', 110.00),
+(8, 'Double', 140.00),
+(9, 'Suite', 260.00),
+(10, 'Single', 120.00),
+(11, 'Double', 160.00),
+(12, 'Suite', 230.00),
+(13, 'Single', 130.00),
+(14, 'Double', 170.00),
+(15, 'Suite', 240.00),
+(16, 'Single', 105.00);
+
+
+Booking table(18 rows):
+INSERT INTO Booking (booking_id, booking_date, check_in_date, check_out_date, booking_status, guest_id, room_id) VALUES 
+(1, '2024-01-10', '2024-01-15', '2024-01-20', 'Confirmed', 1, 2),
+(2, '2023-12-25', '2023-12-30', '2024-01-05', 'Completed', 2, 3),
+(3, '2024-03-01', '2024-03-05', '2024-03-10', 'Confirmed', 3, 1),
+(4, '2024-02-01', '2024-02-05', '2024-02-10', 'Confirmed', 4, 4),
+(5, '2023-11-20', '2023-11-25', '2023-11-30', 'Completed', 5, 5),
+(6, '2024-04-15', '2024-04-20', '2024-04-25', 'Cancelled', 6, 6),
+(7, '2024-05-10', '2024-05-15', '2024-05-20', 'Confirmed', 7, 7),
+(8, '2024-06-01', '2024-06-05', '2024-06-10', 'Confirmed', 8, 8),
+(9, '2024-07-15', '2024-07-20', '2024-07-25', 'Completed', 9, 9),
+(10, '2024-08-01', '2024-08-05', '2024-08-10', 'Confirmed', 10, 10),
+(11, '2024-09-01', '2024-09-05', '2024-09-10', 'Completed', 11, 11),
+(12, '2023-10-15', '2023-10-20', '2023-10-25', 'Cancelled', 12, 12),
+(13, '2023-11-01', '2023-11-05', '2023-11-10', 'Confirmed', 13, 13),
+(14, '2023-12-10', '2023-12-15', '2023-12-20', 'Completed', 14, 14),
+(15, '2024-01-20', '2024-01-25', '2024-01-30', 'Confirmed', 15, 15),
+(16, '2024-02-10', '2024-02-15', '2024-02-20', 'Completed', 1, 16),
+(17, '2024-03-15', '2024-03-20', '2024-03-25', 'Confirmed', 3, 4),
+(18, '2024-10-01', '2024-12-15', '2024-12-20', 'Confirmed', 16, 1);
+
+
+Payment table(22 rows):
+INSERT INTO Payment (payment_id, payment_date, amount_paid, payment_method, booking_id) VALUES
+(1, '2024-01-20', 500.0, 'Credit Card', 1),
+(2, '2024-01-05', 750.0, 'Credit Card', 2),
+(3, '2024-03-10', 300.0, 'Cash', 3),
+(4, '2024-02-10', 400.0, 'Credit Card', 4),
+(5, '2023-11-30', 550.0, 'Credit Card', 5),
+(6, '2024-04-25', 600.0, 'Cash', 6),
+(7, '2024-05-20', 700.0, 'Credit Card', 7),
+(8, '2024-06-10', 800.0, 'Cash', 8),
+(9, '2024-07-25', 450.0, 'Credit Card', 9),
+(10, '2024-08-10', 750.0, 'Credit Card', 10),
+(11, '2024-09-10', 350.0, 'Cash', 11),
+(12, '2023-10-25', 550.0, 'Credit Card', 12),
+(13, '2023-11-10', 650.0, 'Cash', 13),
+(14, '2023-12-20', 500.0, 'Credit Card', 14),
+(15, '2024-01-30', 600.0, 'Cash', 15),
+(16, '2024-08-20', 700.0, 'Credit Card', 16),
+(17, '2024-03-25', 800.0, 'Cash', 17),
+(18, '2024-04-10', 450.0, 'Credit Card', 18);
+
+
+--Write SQL Queries
+1. Find the total number of available rooms (with no bookings) between 
+25 December 2023 and 31 January 2024 for each room type. 
+a. Display room type and number of rooms per room type.
+
+SELECT room_type, COUNT(room_id) AS available_rooms
+FROM Room
+WHERE room_id NOT IN (
+    SELECT room_id
+    FROM Booking
+    WHERE (check_in_date BETWEEN '2023-12-25' AND '2024-01-31')
+      OR (check_out_date BETWEEN '2023-12-25' AND '2024-01-31')
+)
+GROUP BY room_type;
+
+
+2. Find all guests with upcoming bookings who are from France. 
+a. Display guest id, guest name, guest country, check-in-date.
+
+SELECT Guest.guest_id, Guest.first_name || ' ' || Guest.last_name AS guest_name, 'France' AS guest_country, Booking.check_in_date
+FROM Guest
+JOIN Booking ON Guest.guest_id = Booking.guest_id
+WHERE Booking.check_in_date > CURRENT_DATE
+AND Guest.address LIKE '%France%';
+
+
+3. Calculate the average total price of bookings for the past (last) 12 
+months. 
+a. Display average price as "Average Price of Booking in Past 12 
+Months". 
+b. Ensure your dataset contains some data in both 2023 and 2024 
+dates.
+
+SELECT AVG(Room.price_per_night * (JULIANDAY(Booking.check_out_date) - JULIANDAY(Booking.check_in_date))) AS "Average Price of Booking in Past 12 Months"
+FROM Booking
+JOIN Room ON Booking.room_id = Room.room_id
+WHERE Booking.check_out_date BETWEEN DATE('now', '-12 months') AND DATE('now');
+
+4. Find all the guests who have made a payment using the credit card method more than once, along with the total amount they have paid.
+a. Display guest id, guest first name and last name as one column 
+(Guest Name), total amount.
+
+SELECT Guest.guest_id, Guest.first_name || ' ' || Guest.last_name AS Guest_Name, SUM(Payment.amount_paid) AS total_amount
+FROM Guest
+JOIN Booking ON Guest.guest_id = Booking.guest_id
+JOIN Payment ON Booking.booking_id = Payment.booking_id
+WHERE Payment.payment_method = 'Credit Card'
+GROUP BY Guest.guest_id
+HAVING COUNT(Payment.payment_id) > 1;
+
+
+5. Find a list of rooms that have at least two bookings, and for each room, 
+show how many bookings each room has (this includes both past and 
+future appointments). Sort the result by the number of bookings, from 
+high to low. 
+a. Display room id, room type, and total number of bookings.
+
+SELECT Room.room_id, Room.room_type, COUNT(Booking.booking_id) AS total_bookings
+FROM Room
+JOIN Booking ON Room.room_id = Booking.room_id
+GROUP BY Room.room_id, Room.room_type
+HAVING COUNT(Booking.booking_id) >= 2
+ORDER BY total_bookings DESC;
+
+
+
+
+ 
